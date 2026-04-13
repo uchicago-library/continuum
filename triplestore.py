@@ -3,6 +3,11 @@ from pathlib import Path
 from typing import Dict, Optional, TypedDict, List
 
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+TURTLE_FILE = os.getenv("CONTINUUM_TURTLE")
 
 store: Store = Store()
 
@@ -68,7 +73,7 @@ def create_database(database: Path):
     else:
         store = Store(database)
         print("loading store from ttl")
-        with open("/data/local/app/continuum.ttl", "r") as ttlp:
+        with open(TURTLE_FILE, "r") as ttlp:
             store.bulk_load(ttlp, format=RdfFormat.TURTLE)
         print("store loaded")
         store.optimize()

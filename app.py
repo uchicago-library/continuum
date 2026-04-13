@@ -6,12 +6,18 @@ from triplestore import (
     TripleStore,
 )
 from pathlib import Path
+from dotenv import load_dotenv
 import os
 
 from typing import Optional
 
+load_dotenv()
+
+BASEDIR = os.getenv("BASEDIR")
+
 # BASEDIR = "/data/digital_collections_ocfl/ark_data/"
-DB = Path("/data/local/app_data/project.db")
+# DB = Path("/data/local/app_data/project.db")
+DB = os.getenv("CONTINUUMDB")
 
 
 def create_app(test_config=None):

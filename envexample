@@ -1,0 +1,7 @@
+# Save this file to .env, or pass these as runtime arguments to the script
+# where to store the oxygraph database
+CONTINUUMDB=
+# where the turtle file is stored
+CONTINUUM_TURTLE
+#This one is optional
+BASEDIR=
