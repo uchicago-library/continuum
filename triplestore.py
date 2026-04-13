@@ -2,8 +2,8 @@ from pyoxigraph import NamedNode, Literal, Store, QuerySolutions, RdfFormat
 from pathlib import Path
 from typing import Dict, Optional, TypedDict, List
 
+import os
 
-DB = Path("app_data/project.db")
 store: Store = Store()
 
 
@@ -58,6 +58,8 @@ ns = NS(PREFIXES)
 
 def create_database(database: Path):
 
+    print(os.getcwd())
+
     if database.exists():
         print("Loading existing store")
         # store = Store(database)
@@ -66,7 +68,7 @@ def create_database(database: Path):
     else:
         store = Store(database)
         print("loading store from ttl")
-        with open("app_data/continuum_2026-03-30T15:35.ttl", "r") as ttlp:
+        with open("/data/local/app/continuum.ttl", "r") as ttlp:
             store.bulk_load(ttlp, format=RdfFormat.TURTLE)
         print("store loaded")
         store.optimize()
@@ -117,7 +119,7 @@ class TripleStore:
     VALUES ?ark { %s }
     ?arkNode continuum:hasArkID ?ark .
     ?file dcterms:isPartOf ?arkNode .
-    ?file continuum:fileType %s .
+    #?file continuum:fileType %s .
     ?file  continuum:hasPath ?path .
     """ % (
             Literal(arguments["ark_id"]),
