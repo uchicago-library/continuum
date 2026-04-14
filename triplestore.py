@@ -63,7 +63,7 @@ ns = NS(PREFIXES)
 
 def create_database(database: Path):
 
-    print(os.getcwd())
+    # print(os.getcwd())
 
     if database.exists():
         print("Loading existing store")
@@ -156,7 +156,7 @@ class TripleStore:
                 )
 
         query = query + "\n }"
-        print(query)
+        # print(query)
         results = self.store.query(query)
         if not isinstance(results, QuerySolutions):
             raise Exception("Error in query")

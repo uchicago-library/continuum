@@ -18,6 +18,7 @@ BASEDIR = os.getenv("BASEDIR")
 # BASEDIR = "/data/digital_collections_ocfl/ark_data/"
 # DB = Path("/data/local/app_data/project.db")
 DB = os.getenv("CONTINUUMDB")
+# print(DB)
 
 
 def create_app(test_config=None):
@@ -69,9 +70,9 @@ def create_app(test_config=None):
                 file_name=file_name,
                 page=None,
             )
-            print("file arguments", obj)
+            # print("file arguments", obj)
             image_obj = store.find_file_path(obj)
-            print("image obj", image_obj)
+            # print("image obj", image_obj)
             if len(image_obj) == 1:
                 image_path = Path(image_obj[0]["path"])
 
@@ -79,7 +80,7 @@ def create_app(test_config=None):
                 # image_path = Path(
                 #    ipath.replace("/data/digital_collections_ocfl/ark_data/", BASEDIR)
                 # )
-                print("image path: ", image_path)
+                # print("image path: ", image_path)
                 if not image_path.is_file():
                     return f"error: Image not found on the server {image_path}", 400
                 return send_file(image_path, as_attachment=False)
