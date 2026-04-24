@@ -1,4 +1,5 @@
 from flask import Flask, send_file
+from flask_cors import CORS
 from triplestore import (
     filter_file_types,
     FileArguments,
@@ -8,6 +9,7 @@ from triplestore import (
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+
 
 from typing import Optional
 
@@ -20,12 +22,17 @@ BASEDIR = os.getenv("BASEDIR")
 DB = os.getenv("CONTINUUMDB")
 # print(DB)
 
+store: TripleStore
+
 
 def create_app(test_config=None):
     """ """
+    # Initialize the triple store
+    global store
     store = TripleStore(Path(DB))
 
     app = Flask(__name__)
+    CORS(app, origins=["*"])
 
     @app.route("/")
     def say_hello():
@@ -77,6 +84,12 @@ def create_app(test_config=None):
                 image_path = Path(image_obj[0]["path"])
 
                 # print("ipath", ipath)
+                if BASEDIR:
+                    relative_path = Path(image_path).relative_to(
+                        "/data/digital_collections_ocfl/ark_data/"
+                    )
+
+                    image_path = Path(BASEDIR) / relative_path
                 # image_path = Path(
                 #    ipath.replace("/data/digital_collections_ocfl/ark_data/", BASEDIR)
                 # )
