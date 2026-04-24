@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import Dict, Optional, TypedDict, List
 
 import os
+import shutil
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -62,8 +63,10 @@ ns = NS(PREFIXES)
 
 
 def create_database(database: Path):
+    """Update the database"""
 
     # print(os.getcwd())
+    turtle_time = os.path.getmtime(TURTLE_FILE)
 
     if database.exists():
         print("Loading existing store")
@@ -79,7 +82,7 @@ def create_database(database: Path):
         store.optimize()
         store.flush()
         store = Store.read_only(str(database))
-    return store
+    return store, turtle_time
 
 
 def filter_file_types(file_type: str):
@@ -99,7 +102,7 @@ def filter_file_types(file_type: str):
 
 class TripleStore:
     def __init__(self, database: Path):
-        self.store = create_database(database)
+        self.store, self.turtle_time = create_database(database)
 
     def find_file_path(self, arguments: FileArguments) -> List[Dict[str, str]]:
         """
