@@ -1,4 +1,4 @@
-from flask import Flask, send_file
+from flask import Flask, send_file, request, jsonify
 from triplestore import (
     filter_file_types,
     FileArguments,
@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 import os
 
 
+import atexit
 from typing import Optional
 
 load_dotenv()
@@ -20,15 +21,19 @@ BASEDIR = os.getenv("BASEDIR")
 # DB = Path("/data/local/app_data/project.db")
 DB = os.getenv("CONTINUUMDB")
 # print(DB)
+#
 
+STARTUP_COMPLETED = False
 store: TripleStore
+
+# store = TripleStore(Path(DB))
 
 
 def create_app(test_config=None):
     """ """
     # Initialize the triple store
-    global store
-    store = TripleStore(Path(DB))
+    # global store
+    # store = TripleStore(Path(DB))
 
     app = Flask(__name__)
 
@@ -36,16 +41,15 @@ def create_app(test_config=None):
     def say_hello():
         return "Hello World"
 
-    """
     @app.before_request
     def tet():
+        global store
         global STARTUP_COMPLETED
         if not STARTUP_COMPLETED:
             print("initializing database")
-            create_database()
+            # store, _ = create_database(Path(DB))
+            store = TripleStore(Path(DB))
             STARTUP_COMPLETED = True
-
-    """
 
     @app.route("/file/<ark_id>/<file_name>")
     @app.route("/file/<ark_id>/<file_name>/<version>")
@@ -97,7 +101,43 @@ def create_app(test_config=None):
                 return send_file(image_path, as_attachment=False)
             return "file not found", 400
 
+    @app.route("/update/<method>", methods=["POST"])
+    def update_triples(method: str):
+        global store
+        if request.method != "POST":
+            return "not found"
+        if method == "backup":
+            # run back up
+            return "backup successful"
+        file = request.files["file"]
+        content = file.read().decode("utf-8")
+
+        match method:
+            case "file":
+                # print("content", content)
+                store.update_cho(content)
+            case "rq":
+                return store.query(content)
+            case "ru":
+                return store.update_qeury(content)
+            case _:
+                return jsonify({"message": "error in update method"})
+        return "all good"
+
     return app
 
+
+# defining function to run on shutdown
+def close_running_threads():
+    print("Threads complete, ready to finish")
+    global store
+    store.flush()
+    del store.store
+    del store
+
+
+# Register the function to be called on exit
+atexit.register(close_running_threads)
+# start your process
 
 app = create_app()

@@ -1,4 +1,13 @@
-from pyoxigraph import NamedNode, Literal, Store, QuerySolutions, RdfFormat
+from pyoxigraph import (
+    NamedNode,
+    Literal,
+    Store,
+    QuerySolutions,
+    RdfFormat,
+    QueryResultsFormat,
+    QueryBoolean,
+    QueryTriples,
+)
 from pathlib import Path
 from typing import Dict, Optional, TypedDict, List
 
@@ -56,6 +65,7 @@ PREFIXES = {
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "edm": "http://www.europeana.eu/schemas/edm/",
 }
 
 
@@ -71,17 +81,18 @@ def create_database(database: Path):
     if database.exists():
         print("Loading existing store")
         # store = Store(database)
-        store = Store.read_only(str(database))
+        # store = Store.read_only(str(database))
+        store = Store(str(database))
         print("store loaded")
     else:
-        store = Store(database)
+        store = Store(str(database))
         print("loading store from ttl")
         with open(TURTLE_FILE, "r") as ttlp:
             store.bulk_load(ttlp, format=RdfFormat.TURTLE)
         print("store loaded")
         store.optimize()
         store.flush()
-        store = Store.read_only(str(database))
+        # store = Store.read_only(str(database))
     return store, turtle_time
 
 
@@ -103,6 +114,56 @@ def filter_file_types(file_type: str):
 class TripleStore:
     def __init__(self, database: Path):
         self.store, self.turtle_time = create_database(database)
+
+    def query(self, query: str):
+        results = self.store.query(query)
+
+        # return self.store.query(query)
+        match results:
+            case QuerySolutions():
+                return results.serialize(format=QueryResultsFormat.JSON)
+            case QueryBoolean():
+                return results.serialize(format=QueryResultsFormat.JSON)
+            case QueryTriples():
+                return results.serialize(format=RdfFormat.TURTLE)
+            case _:
+                pass
+        return results.serialize(format=QueryResultsFormat.JSON)
+
+    def update_query(self, query: str):
+        return self.store.update(query)
+
+    def update_cho(self, serialized_triples: str):
+        temp_store = Store()
+        temp_store.bulk_load(serialized_triples, format=RdfFormat.TURTLE)
+        update_query = """
+    PREFIX continuum: <http://continuum.lib.uchicago.edu/ontology/>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX ark: <http://ark.lib.uchicago.edu/>
+    PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+    PREFIX premis: <http://www.loc.gov/premis/rdf/v3/>
+
+    DELETE {
+        ?arkNode continuum:hasHeadObject ?object .
+    }
+    WHERE {
+        VALUES ?arkNode { %s }
+        ?arkNode
+            a edm:ProvidedCHO .
+    }
+        """ % "\n".join(
+            [
+                str(qwad.subject)
+                for qwad in temp_store.quads_for_pattern(
+                    None, ns.rdf.type, ns.edm.ProvidedCHO, None
+                )
+            ]
+        )
+        # print("update query", update_query)
+
+        self.store.update(update_query)
+        self.store.bulk_load(serialized_triples, format=RdfFormat.TURTLE)
 
     def find_file_path(self, arguments: FileArguments) -> List[Dict[str, str]]:
         """
@@ -164,3 +225,6 @@ class TripleStore:
         if not isinstance(results, QuerySolutions):
             raise Exception("Error in query")
         return [{"ark": res["ark"].value, "path": res["path"].value} for res in results]
+
+    def flush():
+        self.store.flush()
