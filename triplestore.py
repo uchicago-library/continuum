@@ -1,5 +1,6 @@
 from pyoxigraph import (
     NamedNode,
+    Quad,
     Literal,
     Store,
     QuerySolutions,
@@ -9,7 +10,10 @@ from pyoxigraph import (
     QueryTriples,
 )
 from pathlib import Path
+from werkzeug.security import generate_password_hash
 from typing import Dict, Optional, TypedDict, List
+
+import hashlib
 
 import os
 import shutil
@@ -28,6 +32,12 @@ class FileArguments(TypedDict):
     version: str
     file_name: Optional[str]
     page: Optional[str]
+
+
+class AuthenticationException(Exception):
+    def __init__(self, message):
+        self.message = message
+        super().__init__(self.message)
 
 
 class Namespace(str):
@@ -72,24 +82,56 @@ PREFIXES = {
 ns = NS(PREFIXES)
 
 
-def create_database(database: Path):
+def create_auth_graph(store: Store):
+    """ """
+    m = hashlib.sha256()
+    user_graph = ns.cont.term("UserGraph")
+    store.clear_graph(user_graph)
+    username = os.getenv("CONTINUUMADMIN")
+    pswrd = os.getenv("CONTINUUMKEY")
+    m.update(username.encode("utf-8"))
+    user_node = ns.cont.term("data/_User_" + m.hexdigest()[:16])
+
+    store.add(Quad(user_node, ns.rdf.type, ns.continuum.User, user_graph))
+    store.add(Quad(user_node, ns.continuum.userName, Literal(ADMIN), user_graph))
+    store.add(
+        Quad(
+            user_node,
+            ns.continuum.hashedPassword,
+            Literal(generate_password_hash(ADMIN_KEY)),
+            user_graph,
+        )
+    )
+    return store
+
+
+def fake_logger():
+    def debug(s: str):
+        print(s)
+
+    def info(s: str):
+        print(s)
+
+
+def create_database(database: Path, logger=fake_logger):
     """Update the database"""
 
     # print(os.getcwd())
     turtle_time = os.path.getmtime(TURTLE_FILE)
 
     if database.exists():
-        print("Loading existing store")
+        logger.info("Loading existing store")
         # store = Store(database)
         # store = Store.read_only(str(database))
         store = Store(str(database))
-        print("store loaded")
+        logger.info("store loaded")
     else:
         store = Store(str(database))
-        print("loading store from ttl")
+        logger.info("loading store from ttl")
         with open(TURTLE_FILE, "r") as ttlp:
             store.bulk_load(ttlp, format=RdfFormat.TURTLE)
-        print("store loaded")
+        logger.info("store loaded")
+        store = create_auth_graph(store)
         store.optimize()
         store.flush()
         # store = Store.read_only(str(database))
@@ -112,8 +154,9 @@ def filter_file_types(file_type: str):
 
 
 class TripleStore:
-    def __init__(self, database: Path):
+    def __init__(self, database: Path, logger=fake_logger):
         self.store, self.turtle_time = create_database(database)
+        self.logger = logger
 
     def query(self, query: str):
         results = self.store.query(query)
@@ -160,7 +203,7 @@ class TripleStore:
                 )
             ]
         )
-        # print("update query", update_query)
+        logger.debug("update query", update_query)
 
         self.store.update(update_query)
         self.store.bulk_load(serialized_triples, format=RdfFormat.TURTLE)
@@ -175,7 +218,7 @@ class TripleStore:
         file_name: Optional[str]
         page: Optional[str]
         """
-        # print(arguments)
+        self.logger.debug(f"arguments: {arguments}")
         query = """
     PREFIX continuum: <http://continuum.lib.uchicago.edu/ontology/>
     PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -220,11 +263,39 @@ class TripleStore:
                 )
 
         query = query + "\n }"
-        # print(query)
+        self.logger.debug(f"find file path, query:  {query}")
         results = self.store.query(query)
         if not isinstance(results, QuerySolutions):
             raise Exception("Error in query")
         return [{"ark": res["ark"].value, "path": res["path"].value} for res in results]
+
+    def fetch_user(self, username: str):
+        """Fetch usernode and password"""
+        if not username:
+            raise AuthenticationException("No Username provided")
+        query = """PREFIX continuum: <http://continuum.lib.uchicago.edu/ontology/>
+        PREFIX cont: <http://continuum.lib.uchicago.edu/>
+
+        SELECT ?usernode ?username ?pswrd
+        WHERE {
+            GRAPH cont:UserGraph {
+                ?usernode
+                    a continuum:User ;
+                    continuum:userName ?username ;
+                    continuum:hashedPassword ?pswrd ;
+                .
+                VALUES ?username { %s }
+            }
+        }
+        """ % Literal(
+            username
+        )
+        self.logger.debug(f"fetch user query: {query}")
+
+        solution = next(self.store.query(query))
+        usernode, username, pswrd = solution
+
+        return usernode, username, pswrd
 
     def flush():
         self.store.flush()

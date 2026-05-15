@@ -2,6 +2,9 @@
 # where to store the oxygraph database
 CONTINUUMDB=
 # where the turtle file is stored
-CONTINUUM_TURTLE
+CONTINUUM_TURTLE=
 #This one is optional
 BASEDIR=
+#
+CONTINUUMADMIN=
+CONTINUUMKEY=

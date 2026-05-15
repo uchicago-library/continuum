@@ -9,6 +9,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 
+from flask_httpauth import HTTPBasicAuth
+from werkzeug.security import generate_password_hash, check_password_hash
 
 import atexit
 from typing import Optional
@@ -27,6 +29,8 @@ STARTUP_COMPLETED = False
 store: TripleStore
 
 # store = TripleStore(Path(DB))
+#
+#
 
 
 def create_app(test_config=None):
@@ -36,6 +40,16 @@ def create_app(test_config=None):
     # store = TripleStore(Path(DB))
 
     app = Flask(__name__)
+    auth = HTTPBasicAuth()
+
+    @auth.verify_password
+    def verify_password(username, password):
+        """
+        Only use this for routes protected and used on the local network
+        """
+        username, usernode, pswrd = store.fetch_user(username)
+        if check_password_hash(pswrd.value, password):
+            return usernode
 
     @app.route("/")
     def say_hello():
@@ -46,9 +60,9 @@ def create_app(test_config=None):
         global store
         global STARTUP_COMPLETED
         if not STARTUP_COMPLETED:
-            print("initializing database")
+            app.logger.debug("initializing database")
             # store, _ = create_database(Path(DB))
-            store = TripleStore(Path(DB))
+            store = TripleStore(Path(DB), logger=app.logger)
             STARTUP_COMPLETED = True
 
     @app.route("/file/<ark_id>/<file_name>")
@@ -58,7 +72,9 @@ def create_app(test_config=None):
         Used by the ark Resolver to return the file, if the file is not passed, URLs for the
         different files are returned.
         """
-        # print(f"ark_id: {ark_id}, file_name: {file_name}, version: {version}")
+        app.logger.debug(
+            f"ark_id: {ark_id}, file_name: {file_name}, version: {version}"
+        )
 
         if file_name:
             fname, ext = os.path.splitext(file_name)
@@ -101,7 +117,8 @@ def create_app(test_config=None):
                 return send_file(image_path, as_attachment=False)
             return "file not found", 400
 
-    @app.route("/update/<method>", methods=["POST"])
+    @app.route("/protected/<method>", methods=["POST"])
+    @auth.login_required
     def update_triples(method: str):
         global store
         if request.method != "POST":
@@ -131,9 +148,9 @@ def create_app(test_config=None):
 def close_running_threads():
     print("Threads complete, ready to finish")
     global store
-    store.flush()
-    del store.store
-    del store
+    # store.flush()
+    # del store.store
+    # del store
 
 
 # Register the function to be called on exit
