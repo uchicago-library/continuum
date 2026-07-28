@@ -47,7 +47,7 @@ class NS:
 
 PREFIXES = {
     "ark": "http://ark.lib.uchicago.edu/",
-    "continuum": "http://continuum.lib.uchicago.edu/ontology/",
+    "continuum": "https://continuum.lib.uchicago.edu/ontology/",
     "cont": "http://continuum.lib.uchicago.edu/",
     "premis": "http://www.loc.gov/premis/rdf/v3/",
     "ebucore": "http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#",
@@ -116,18 +116,22 @@ class TripleStore:
         """
         # print(arguments)
         query = """
-    PREFIX continuum: <http://continuum.lib.uchicago.edu/ontology/>
+    PREFIX continuum: <https://continuum.lib.uchicago.edu/ontology/>
     PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX dc: <http://purl.org/dc/elements/1.1/>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX ark: <http://ark.lib.uchicago.edu/>
+    PREFIX edm: <http://www.europeana.eu/schemas/edm/>
     PREFIX premis: <http://www.loc.gov/premis/rdf/v3/>
 
     SELECT ?ark ?path
     WHERE {
     VALUES ?ark { %s }
     ?arkNode continuum:hasArkID ?ark .
+    ?arkNode dc:rights ?rights .
+    # ?rights a [ rdfs:subClassOf uchicago:Available ] .
     ?file dcterms:isPartOf ?arkNode .
-    #?file continuum:fileType %s .
+    ?file continuum:fileType %s .
     ?file  continuum:hasPath ?path .
     """ % (
             Literal(arguments["ark_id"]),
@@ -143,6 +147,8 @@ class TripleStore:
                 arguments["version"]
             )
         page = arguments.get("page")
+        if page:
+            query = query + "\n  ?file continuum:partNumber %s ." % Literal(page)
         if file_name := arguments.get("file_name"):
             if not page:
 
