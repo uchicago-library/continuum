@@ -117,6 +117,7 @@ class TripleStore:
         # print(arguments)
         query = """
     PREFIX continuum: <https://continuum.lib.uchicago.edu/ontology/>
+    PREFIX uchicago: <https://lib.uchicago.edu/>
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX dc: <http://purl.org/dc/elements/1.1/>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -133,6 +134,7 @@ class TripleStore:
     ?file dcterms:isPartOf ?arkNode .
     ?file continuum:fileType %s .
     ?file  continuum:hasPath ?path .
+    ?file premis:basis/premis:allows uchicago:DownloadAllowed .
     """ % (
             Literal(arguments["ark_id"]),
             arguments["type_node"],
