@@ -102,21 +102,6 @@ def create_app(test_config=None):
             image_path = Path(image_obj[0]["path"])
 
             # print("ipath", ipath)
-        elif len(image_obj) > 1:
-            filtered_image = list(
-                filter(lambda x: x["path"].endswith(".pdf"), image_obj)
-            )
-            print(f"filtered image: {filtered_image}")
-            if len(filtered_image) != 1:
-                print(f"error: image not found on the server {image_obj}")
-                return (
-                    "The requested resource is unavailable. Please consult node@lib.uchicago.edu for further information",
-                    403,
-                )
-            image_path = filtered_image[0]["path"]
-            # image_path = Path(BASEDIR) / filtered_image[0]["path"]
-            # print(f"image path: {image_path}")
-            # return send_file(image_path, as_attachment=False)
         else:
             return (
                 "The requested resource is unavailable. Please consult node@lib.uchicago.edu for further information",
