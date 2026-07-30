@@ -19,6 +19,7 @@ class FileArguments(TypedDict):
     version: str
     file_name: Optional[str]
     page: Optional[str]
+    mime_type: Optional[str]
 
 
 class Namespace(str):
@@ -124,17 +125,17 @@ class TripleStore:
     PREFIX ark: <http://ark.lib.uchicago.edu/>
     PREFIX edm: <http://www.europeana.eu/schemas/edm/>
     PREFIX premis: <http://www.loc.gov/premis/rdf/v3/>
+    PREFIX ebucore: <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#>
 
     SELECT ?ark ?path
     WHERE {
-    VALUES ?ark { %s }
-    ?arkNode continuum:hasArkID ?ark .
-    ?arkNode dc:rights ?rights .
-    # ?rights a [ rdfs:subClassOf uchicago:Available ] .
-    ?file dcterms:isPartOf ?arkNode .
-    ?file continuum:fileType %s .
-    ?file  continuum:hasPath ?path .
-    ?file premis:basis/premis:allows uchicago:DownloadAllowed .
+      VALUES ?ark { %s }
+      ?arkNode continuum:hasArkID ?ark .
+      ?arkNode dc:rights ?rights .
+      ?file dcterms:isPartOf ?arkNode .
+      ?file continuum:fileType %s .
+      ?file  continuum:hasPath ?path .
+      ?file premis:basis/premis:allows uchicago:DownloadAllowed .
     """ % (
             Literal(arguments["ark_id"]),
             arguments["type_node"],
@@ -143,18 +144,18 @@ class TripleStore:
         version = arguments.get("version")
         if version == "head":
 
-            query = query + "   ?arkNode continuum:hasHeadObject ?file . "
+            query = query + "    ?arkNode continuum:hasHeadObject ?file . "
         elif version:
-            query = query + "  ?file continuum:partOfVersion %s ." % Literal(
+            query = query + "      ?file continuum:partOfVersion %s ." % Literal(
                 arguments["version"]
             )
         page = arguments.get("page")
         if page:
-            query = query + "\n  ?file continuum:partNumber %s ." % Literal(page)
+            query = query + "\n      ?file continuum:partNumber %s ." % Literal(page)
         if file_name := arguments.get("file_name"):
             if not page:
 
-                query = query + "\n  ?file premis:originalName %s ." % Literal(
+                query = query + "\n      ?file premis:originalName %s ." % Literal(
                     file_name
                 )
 
@@ -162,11 +163,15 @@ class TripleStore:
                 # if page:
                 query = (
                     query
-                    + "\n  ?file <http://www.loc.gov/premis/rdf/v3/originalName> %s ."
+                    + "\n      ?file <http://www.loc.gov/premis/rdf/v3/originalName> %s ."
                     % Literal(page + "/" + file_name)
                 )
+        if mime_type := arguments.get("mime_type"):
+            query = query + "\n      ?file ebucore:hasMimeType %s ." % Literal(
+                mime_type
+            )
 
-        query = query + "\n }"
+        query = query + "\n    }"
         # print(query)
         results = self.store.query(query)
         if not isinstance(results, QuerySolutions):
