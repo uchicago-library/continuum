@@ -61,8 +61,9 @@ def create_app(test_config=None):
         Used by the ark Resolver to return the file, if the file is not passed, URLs for the
         different files are returned.
         argv0 : ark_id
-        argv1 : file_name | page
-        argv2 : file_name
+        argv1 : file_name | page | "pdf"
+        argv2 : file_name | version
+        argv3 : version
         <ark_id>/<page>/<file_name>/<version>
         """
         # print(f"ark_id: {ark_id}, file_name: {file_name}, version: {version}")
@@ -73,6 +74,10 @@ def create_app(test_config=None):
             version = file_name
             file_name = page
             page = None
+
+        mime_type = "application/pdf" if file_name == "pdf" else None
+        if mime_type:
+            file_name = None
 
         if file_name:
             fname, ext = os.path.splitext(file_name)
@@ -94,6 +99,7 @@ def create_app(test_config=None):
             version=version,
             file_name=file_name,
             page=page,
+            mime_type=mime_type,
         )
         print("file arguments", obj)
         image_obj = store.find_file_path(obj)
