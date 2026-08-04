@@ -131,7 +131,7 @@ class TripleStore:
     WHERE {
       VALUES ?ark { %s }
       ?arkNode continuum:hasArkID ?ark .
-      ?arkNode dc:rights ?rights .
+      # ?arkNode dc:rights ?rights .
       ?file dcterms:isPartOf ?arkNode .
       ?file continuum:fileType %s .
       ?file  continuum:hasPath ?path .

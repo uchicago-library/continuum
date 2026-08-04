@@ -49,6 +49,8 @@ def construct_file_arguments(
             # print(fname)
             type_node = filter_file_types("viewer")
             # print(type_node)
+        if "manifest" in fname:
+            type_node = filter_file_types("manifest")
         elif file_name == "pdf":
             file_name = None
             mime_type = "application/pdf"
