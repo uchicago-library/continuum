@@ -135,7 +135,7 @@ class TripleStore:
       ?file dcterms:isPartOf ?arkNode .
       ?file continuum:fileType %s .
       ?file  continuum:hasPath ?path .
-      ?file premis:basis/premis:allows uchicago:DownloadAllowed .
+      # ?file premis:basis/premis:allows uchicago:DownloadAllowed .
     """ % (
             Literal(arguments["ark_id"]),
             arguments["type_node"],
