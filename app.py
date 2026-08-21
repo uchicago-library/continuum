@@ -2,7 +2,7 @@ from flask import Flask, send_file
 from triplestore import (
     filter_file_types,
     FileArguments,
-    create_database,
+    # create_database,
     TripleStore,
 )
 from pathlib import Path
@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 import os
 
 
-from typing import Optional
+from typing import Optional, Callable
 
 load_dotenv()
 
@@ -25,6 +25,7 @@ store: TripleStore
 
 
 def construct_file_arguments(
+    logger: Callable,
     ark_id: str,
     file_name: Optional[str] = None,
     page: Optional[str] = None,
@@ -46,10 +47,9 @@ def construct_file_arguments(
     if file_name:
         fname, ext = os.path.splitext(file_name)
         if "vaf" in fname:
-            # print(fname)
             type_node = filter_file_types("viewer")
             # print(type_node)
-        if "manifest" in fname:
+        elif "manifest" in fname:
             type_node = filter_file_types("manifest")
         elif file_name == "pdf":
             file_name = None
@@ -58,6 +58,15 @@ def construct_file_arguments(
         elif file_name == "pres":
             type_node = filter_file_types("preservation")
             file_name = None
+        elif file_name == "ocr":
+            type_node = filter_file_types("supplemental")
+            file_name = "file.txt"
+        elif file_name == "mets":
+            type_node = filter_file_types("supplemental")
+            file_name = "file.mets.xml"
+        elif file_name == "alto":
+            type_node = filter_file_types("supplemental")
+            file_name = "file.xml"
         else:
             type_node = filter_file_types(
                 "preservation" if ext in (".pdf", ".tif", ".wav") else "supplemental"
@@ -72,7 +81,7 @@ def construct_file_arguments(
         page=page,
         mime_type=mime_type,
     )
-    # print("file arguments", obj)
+    logger.debug("file arguments", obj)
     return obj
 
 
@@ -80,9 +89,10 @@ def create_app(test_config=None):
     """ """
     # Initialize the triple store
     global store
-    store = TripleStore(Path(DB))
 
     app = Flask(__name__)
+
+    store = TripleStore(Path(DB), app.logger)
 
     @app.route("/")
     def say_hello():
@@ -138,7 +148,7 @@ def create_app(test_config=None):
         """
         # print(f"ark_id: {ark_id}, file_name: {file_name}, version: {version}")
         obj = construct_file_arguments(
-            ark_id, file_name=file_name, page=page, version=version
+            app.logger, ark_id, file_name=file_name, page=page, version=version
         )
         # print("file arguments", obj)
         image_obj = store.find_file_path(obj)
