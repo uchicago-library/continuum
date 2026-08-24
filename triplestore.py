@@ -116,7 +116,7 @@ def create_database(database: Path, logger: Callable):
         if len(startdt) == 0 or startdt[0] < turtle_time:
             logger.info("Turtle Out of Date")
             shutil.rmtree(database)
-            store = load_store(database, turtle_time)
+            store = load_store(database, turtle_time, logger)
 
     else:
         store = Store(database)
