@@ -1,9 +1,9 @@
-from pyoxigraph import NamedNode, Literal, Store, QuerySolutions, RdfFormat
+from pyoxigraph import NamedNode, Literal, Store, QuerySolutions, RdfFormat, Quad
 from pathlib import Path
-from typing import Dict, Optional, TypedDict, List
+from typing import Dict, Optional, TypedDict, List, Callable
+import shutil
 
 import os
-import shutil
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -63,26 +63,66 @@ PREFIXES = {
 ns = NS(PREFIXES)
 
 
-def create_database(database: Path):
-    """Update the database"""
+def load_store(database: Path, turtle_time: float, logger: Callable):
+    """
+    Create a new store, and add the timestamp to it
+    """
+    store = Store(str(database))
+    logger.info("loading store from ttl")
+    with open(TURTLE_FILE, "r") as ttlp:
+        store.bulk_load(ttlp, format=RdfFormat.TURTLE)
+    logger.info("store loaded")
+    store.add(
+        Quad(
+            ns.cont.ContinuumServer,
+            ns.continuum.timestamp,
+            Literal(str(turtle_time), datatype=ns.xsd.double),
+        )
+    )
+    store.optimize()
+    store.flush()
+    store = Store.read_only(str(database))
+    return store
+
+
+def create_database(database: Path, logger: Callable):
+    """This creates the database connection.
+    If No database exists, the database is created from a turtle file
+    But if the dtabase does exist and is outdated, the database is deleted
+    and a new database is created
+
+    Update the database
+    """
 
     # print(os.getcwd())
     turtle_time = os.path.getmtime(TURTLE_FILE)
+    global store
 
     if database.exists():
-        print("Loading existing store")
+        logger.info("Loading existing store")
         # store = Store(database)
         store = Store.read_only(str(database))
-        print("store loaded")
+        logger.info("store loaded")
+        startdt = sorted(
+            [
+                float(dt.value)
+                for _, _, dt, _ in store.quads_for_pattern(
+                    ns.cont.ContinuumServer, ns.continuum.timestamp, None
+                )
+            ],
+            reverse=True,
+        )
+
+        if len(startdt) == 0 or startdt[0] < turtle_time:
+            logger.info("Turtle Out of Date")
+            shutil.rmtree(database)
+            store = load_store(database, turtle_time)
+
     else:
         store = Store(database)
-        print("loading store from ttl")
-        with open(TURTLE_FILE, "r") as ttlp:
-            store.bulk_load(ttlp, format=RdfFormat.TURTLE)
-        print("store loaded")
-        store.optimize()
-        store.flush()
-        store = Store.read_only(str(database))
+        logger.info("loading store from ttl")
+        store = load_store(database, turtle_time)
+
     return store, turtle_time
 
 
@@ -102,8 +142,9 @@ def filter_file_types(file_type: str):
 
 
 class TripleStore:
-    def __init__(self, database: Path):
-        self.store, self.turtle_time = create_database(database)
+    def __init__(self, database: Path, logger: Callable):
+        self.store, self.turtle_time = create_database(database, logger)
+        self.logger = logger
 
     def find_file_path(self, arguments: FileArguments) -> List[Dict[str, str]]:
         """
@@ -135,7 +176,7 @@ class TripleStore:
       ?file dcterms:isPartOf ?arkNode .
       ?file continuum:fileType %s .
       ?file  continuum:hasPath ?path .
-      # ?file premis:basis/premis:allows uchicago:DownloadAllowed .
+      ?file premis:basis/premis:allows uchicago:DownloadAllowed .
     """ % (
             Literal(arguments["ark_id"]),
             arguments["type_node"],
@@ -154,17 +195,13 @@ class TripleStore:
             query = query + "\n      ?file continuum:partNumber %s ." % Literal(page)
         if file_name := arguments.get("file_name"):
             if not page:
-
-                query = query + "\n      ?file premis:originalName %s ." % Literal(
+                query = query + "\n      ?file continuum:filename %s ." % Literal(
                     file_name
                 )
-
             else:
                 # if page:
-                query = (
-                    query
-                    + "\n      ?file <http://www.loc.gov/premis/rdf/v3/originalName> %s ."
-                    % Literal(page + "/" + file_name)
+                query = query + "\n      ?file continuum:filename %s ." % Literal(
+                    page + "/" + file_name
                 )
         if mime_type := arguments.get("mime_type"):
             query = query + "\n      ?file ebucore:hasMimeType %s ." % Literal(
@@ -172,7 +209,8 @@ class TripleStore:
             )
 
         query = query + "\n    }"
-        # print(query)
+
+        self.logger.debug(f"Query For Path: \n {query}")
         results = self.store.query(query)
         if not isinstance(results, QuerySolutions):
             raise Exception("Error in query")
