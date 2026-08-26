@@ -1,0 +1,693 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ark: <https://ark.lib.uchicago.edu/> .
+@prefix bf: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix cont: <https://continuum.lib.uchicago.edu/item/> .
+@prefix continuum: <https://continuum.lib.uchicago.edu/ontology/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ebucore: <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#> .
+@prefix edm: <http://www.europeana.eu/schemas/edm/> .
+@prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix uchicago: <https://lib.uchicago.edu/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://ark.lib.uchicago.edu/ark:/61001/b2k86bv2x025>
+    dc:publisher "Social Science Research Committee" ;
+    dc:rights <http://creativecommons.org/licenses/by-nc/4.0/> ;
+    dc:title "Metropolitan region of Chicago, per cent of population white of native parentage, by townships, 1930 : by sectors and zones in Chicago /" ;
+    dcterms:date "1935" ;
+    dcterms:isPartOf <http://continuum.lib.uchicago.edu/project/social-scientists-map-chicago>, "Social Science Research Committee maps of Chicago.", "Social scientists map Chicago.", "University of Chicago Digital Preservation Collection." ;
+    dcterms:issued "1935" ;
+    dcterms:modified "2020-07-22T17:55:43.977981Z"^^xsd:datetime, "2026-03-27T15:56:36.153491Z"^^xsd:datetime ;
+    a edm:ProvidedCHO ;
+    continuum:hasArkID "b2k86bv2x025" ;
+    continuum:hasHeadObject <https://continuum.lib.uchicago.edu/item/b2k86bv2x025/manifest/v2/file.manifest.json>, <https://continuum.lib.uchicago.edu/item/b2k86bv2x025/preservation/v1/file.tif>, <https://continuum.lib.uchicago.edu/item/b2k86bv2x025/supplemental/v1/file.dc.xml>, <https://continuum.lib.uchicago.edu/item/b2k86bv2x025/supplemental/v1/file.ttl>, <https://continuum.lib.uchicago.edu/item/b2k86bv2x025/supplemental/v1/file.xml>, <https://continuum.lib.uchicago.edu/item/b2k86bv2x025/supplemental/v2/file.info.txt>, <https://continuum.lib.uchicago.edu/item/b2k86bv2x025/supplemental/v2/file.mets.xml>, <https://continuum.lib.uchicago.edu/item/b2k86bv2x025/supplemental/v2/file.mrc>, <https://continuum.lib.uchicago.edu/item/b2k86bv2x025/viewer/v2/file.vaf.tif> ;
+    continuum:head "v2" ;
+    continuum:originalIdentifier "G4104-C6-1933-U5-p", "ark:/61001/b2k86bv2x025" .
+
+<https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x>
+    dc:date "1908-04-02" ;
+    dc:identifier "mvol-0004-1908-0204" ;
+    dc:title "Daily Maroon" ;
+    dcterms:modified "2020-12-10T17:57:49.634382Z"^^xsd:datetime, "2026-08-21T08:25:52.146115-06:00"^^xsd:datetime ;
+    a edm:ProvidedCHO ;
+    continuum:hasArkID "b2121x64kz7x" ;
+    continuum:hasHeadObject <https://continuum.lib.uchicago.edu/item/b2121x64kz7x/preservation/v2/file.pdf>, <https://continuum.lib.uchicago.edu/item/b2121x64kz7x/preservation/v2/file.tif/00000001>, <https://continuum.lib.uchicago.edu/item/b2121x64kz7x/preservation/v2/file.tif/00000002>, <https://continuum.lib.uchicago.edu/item/b2121x64kz7x/preservation/v2/file.tif/00000003>, <https://continuum.lib.uchicago.edu/item/b2121x64kz7x/preservation/v2/file.tif/00000004>, <https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v2/constraints.txt>, <https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v2/file.dc.xml>, <https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v2/file.struct.txt>, <https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v2/file.xml/00000001>, <https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v2/file.xml/00000002>, <https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v2/file.xml/00000003>, <https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v2/file.xml/00000004> ;
+    continuum:head "v2" ;
+    continuum:originalIdentifier "mvol-0004-1908-0204" .
+
+<https://ark.lib.uchicago.edu/ark:61001/b26t29x3mm1d>
+    dc:identifier "speculum-0302" ;
+    dcterms:modified "2022-02-14T16:56:50.473205Z"^^xsd:datetime, "2026-08-21T08:25:55.535831-06:00"^^xsd:datetime ;
+    a edm:ProvidedCHO ;
+    continuum:hasArkID "b26t29x3mm1d" ;
+    continuum:hasHeadObject <https://continuum.lib.uchicago.edu/item/b26t29x3mm1d/preservation/v2/file.tif>, <https://continuum.lib.uchicago.edu/item/b26t29x3mm1d/supplemental/v2/constraints.txt>, <https://continuum.lib.uchicago.edu/item/b26t29x3mm1d/supplemental/v2/file.dc.xml> ;
+    continuum:head "v2" ;
+    continuum:originalIdentifier "speculum-0302" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/preservation/v1/file.pdf>
+    dcterms:created "2020-12-10T17:57:49.634382Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "application/pdf" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "e1464ec4b3e98301b4daed265ed22747d548963751ceb4f519dd2dcec2dc005e8d7950797b96d1926c655c406226f29791962039626e76851f542005c1c4f2ba"
+    ] ;
+    continuum:fileType continuum:Preservation ;
+    continuum:filename "file.pdf" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v1/content/file.pdf" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/file.pdf" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/preservation/v1/file.tif/00000001>
+    dcterms:created "2020-12-10T17:57:49.634382Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "image/tiff" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "17f30a13b9f6d11c9efc2c47628eaa416132d1cbcc692b18f651e7899807ab748a87dd78ee32ca2fc141b745fade6e9909443ffe6681b9b30460cdab4b4a3f46"
+    ] ;
+    continuum:fileType continuum:Preservation ;
+    continuum:filename "00000001/file.tif" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v1/content/00000001/file.tif" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000001/file.tif" ;
+    continuum:partNumber "00000001" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/preservation/v1/file.tif/00000002>
+    dcterms:created "2020-12-10T17:57:49.634382Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "image/tiff" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "b9d73212a231f8987c811a81a070bf68ce9a3a948e75a7382e354dc0448888d6aea9209fc4028c9f06a0133969208fac4ad11a49062c1dcdd1bce09b3880f012"
+    ] ;
+    continuum:fileType continuum:Preservation ;
+    continuum:filename "00000002/file.tif" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v1/content/00000002/file.tif" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000002/file.tif" ;
+    continuum:partNumber "00000002" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/preservation/v1/file.tif/00000003>
+    dcterms:created "2020-12-10T17:57:49.634382Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "image/tiff" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "0c3c86db76ef65bcecf10fc41cf4d06daa5b326d8d8de115ceab3dc00665e18adfae7a7ab2ad8c9ff3dd9e2cf9142a30f1678812933abd33fd5e8d7e0f12530d"
+    ] ;
+    continuum:fileType continuum:Preservation ;
+    continuum:filename "00000003/file.tif" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v1/content/00000003/file.tif" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000003/file.tif" ;
+    continuum:partNumber "00000003" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/preservation/v1/file.tif/00000004>
+    dcterms:created "2020-12-10T17:57:49.634382Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "image/tiff" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "524c6078fc85de976f589ae3362c984830639f7b27eee307a7154e229d48359d690f68b3a7bba2c9fcb34379e07a8a1d634b75064cf71bd98c642ba9c9e91f5c"
+    ] ;
+    continuum:fileType continuum:Preservation ;
+    continuum:filename "00000004/file.tif" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v1/content/00000004/file.tif" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000004/file.tif" ;
+    continuum:partNumber "00000004" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/preservation/v2/file.pdf>
+    dcterms:created "2026-08-21T08:25:52.146115-06:00"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "application/pdf" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "e1464ec4b3e98301b4daed265ed22747d548963751ceb4f519dd2dcec2dc005e8d7950797b96d1926c655c406226f29791962039626e76851f542005c1c4f2ba"
+    ] ;
+    continuum:fileType continuum:Preservation ;
+    continuum:filename "file.pdf" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v2/content/file.pdf" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/file.pdf" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/preservation/v2/file.tif/00000001>
+    dcterms:created "2026-08-21T08:25:52.146115-06:00"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "image/tiff" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "17f30a13b9f6d11c9efc2c47628eaa416132d1cbcc692b18f651e7899807ab748a87dd78ee32ca2fc141b745fade6e9909443ffe6681b9b30460cdab4b4a3f46"
+    ] ;
+    continuum:fileType continuum:Preservation ;
+    continuum:filename "00000001/file.tif" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v2/content/00000001/file.tif" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000001/file.tif" ;
+    continuum:partNumber "00000001" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/preservation/v2/file.tif/00000002>
+    dcterms:created "2026-08-21T08:25:52.146115-06:00"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "image/tiff" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "b9d73212a231f8987c811a81a070bf68ce9a3a948e75a7382e354dc0448888d6aea9209fc4028c9f06a0133969208fac4ad11a49062c1dcdd1bce09b3880f012"
+    ] ;
+    continuum:fileType continuum:Preservation ;
+    continuum:filename "00000002/file.tif" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v2/content/00000002/file.tif" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000002/file.tif" ;
+    continuum:partNumber "00000002" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/preservation/v2/file.tif/00000003>
+    dcterms:created "2026-08-21T08:25:52.146115-06:00"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "image/tiff" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "0c3c86db76ef65bcecf10fc41cf4d06daa5b326d8d8de115ceab3dc00665e18adfae7a7ab2ad8c9ff3dd9e2cf9142a30f1678812933abd33fd5e8d7e0f12530d"
+    ] ;
+    continuum:fileType continuum:Preservation ;
+    continuum:filename "00000003/file.tif" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v2/content/00000003/file.tif" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000003/file.tif" ;
+    continuum:partNumber "00000003" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/preservation/v2/file.tif/00000004>
+    dcterms:created "2026-08-21T08:25:52.146115-06:00"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "image/tiff" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "524c6078fc85de976f589ae3362c984830639f7b27eee307a7154e229d48359d690f68b3a7bba2c9fcb34379e07a8a1d634b75064cf71bd98c642ba9c9e91f5c"
+    ] ;
+    continuum:fileType continuum:Preservation ;
+    continuum:filename "00000004/file.tif" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v2/content/00000004/file.tif" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000004/file.tif" ;
+    continuum:partNumber "00000004" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v1/file.dc.xml>
+    dcterms:created "2020-12-10T17:57:49.634382Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "application/xml" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "8e86ffbebfc655307c727bd77fc8bb3e0d13c001f2d0aef1167f4df3e9aefe76b6f885026788a37b9d64c519e020bede9d30b982d6e03d3c82f5ac87713ae765"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "file.dc.xml" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v1/content/file.dc.xml" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/file.dc.xml" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v1/file.struct.txt>
+    dcterms:created "2020-12-10T17:57:49.634382Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "text" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "e4d62ce0767c18206127791354bdfe3c9c6c0b299aed4a85453d5d8c1a16694b2ba8d0921c1205217aa5f1fbc5aa8d596fb17766fb47d3800f028884db10e388"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "file.struct.txt" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v1/content/file.struct.txt" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/file.struct.txt" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v1/file.xml/00000001>
+    dcterms:created "2020-12-10T17:57:49.634382Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "application/xml" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "1a3ebb59dea9b94eaceb078b8146a924d3311a5495317a0688608a77f751ee88e41c0b217f329ba20c61cc34aed9c6a1ca3948c829e642fcb97f9edbd3b08a85"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "00000001/file.xml" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v1/content/00000001/file.xml" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000001/file.xml" ;
+    continuum:partNumber "00000001" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v1/file.xml/00000002>
+    dcterms:created "2020-12-10T17:57:49.634382Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "application/xml" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "900089a0a0c8959deb0592e4ffacd38200441abc08f4a6b9c63ddfb3838a9112749aba9ca8990747a6212e82500ff63c1aa4ba20dddcb7e52423bd0afd9e1cd4"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "00000002/file.xml" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v1/content/00000002/file.xml" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000002/file.xml" ;
+    continuum:partNumber "00000002" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v1/file.xml/00000003>
+    dcterms:created "2020-12-10T17:57:49.634382Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "application/xml" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "8f544d9c66541b5d1b372bf9b63714dfc1b58486554e1fdff51d196c7b9e277455c54af4b1ee1106704072417cd269b407a9308807afe8fc45c10499271fba5a"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "00000003/file.xml" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v1/content/00000003/file.xml" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000003/file.xml" ;
+    continuum:partNumber "00000003" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v1/file.xml/00000004>
+    dcterms:created "2020-12-10T17:57:49.634382Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "application/xml" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "520acf7828058b0ece02b525249ee4f2f0184beb9c429eb4535c84858a9ebeb66e33626713d45bcaffc49d7d82e624b72bb71d47d5af3b18f11e2b523ebe6902"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "00000004/file.xml" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v1/content/00000004/file.xml" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000004/file.xml" ;
+    continuum:partNumber "00000004" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v2/constraints.txt>
+    dcterms:created "2026-08-21T08:25:52.146115-06:00"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "text" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "046e7030f6314e7c8eb38bdce0caa6f83e67e169ea74873289bf131d88ac9f2e2fec819034a43866bbf4d810c8c9b53d1aecdcde995993eb989789098a0f035a"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "constraints.txt" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v2/content/constraints.txt" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v2/content/constraints.txt" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v2/file.dc.xml>
+    dcterms:created "2026-08-21T08:25:52.146115-06:00"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "application/xml" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "8e86ffbebfc655307c727bd77fc8bb3e0d13c001f2d0aef1167f4df3e9aefe76b6f885026788a37b9d64c519e020bede9d30b982d6e03d3c82f5ac87713ae765"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "file.dc.xml" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v2/content/file.dc.xml" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/file.dc.xml" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v2/file.struct.txt>
+    dcterms:created "2026-08-21T08:25:52.146115-06:00"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "text" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "e4d62ce0767c18206127791354bdfe3c9c6c0b299aed4a85453d5d8c1a16694b2ba8d0921c1205217aa5f1fbc5aa8d596fb17766fb47d3800f028884db10e388"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "file.struct.txt" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v2/content/file.struct.txt" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/file.struct.txt" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v2/file.xml/00000001>
+    dcterms:created "2026-08-21T08:25:52.146115-06:00"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "application/xml" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "1a3ebb59dea9b94eaceb078b8146a924d3311a5495317a0688608a77f751ee88e41c0b217f329ba20c61cc34aed9c6a1ca3948c829e642fcb97f9edbd3b08a85"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "00000001/file.xml" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v2/content/00000001/file.xml" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000001/file.xml" ;
+    continuum:partNumber "00000001" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v2/file.xml/00000002>
+    dcterms:created "2026-08-21T08:25:52.146115-06:00"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "application/xml" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "900089a0a0c8959deb0592e4ffacd38200441abc08f4a6b9c63ddfb3838a9112749aba9ca8990747a6212e82500ff63c1aa4ba20dddcb7e52423bd0afd9e1cd4"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "00000002/file.xml" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v2/content/00000002/file.xml" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000002/file.xml" ;
+    continuum:partNumber "00000002" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v2/file.xml/00000003>
+    dcterms:created "2026-08-21T08:25:52.146115-06:00"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "application/xml" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "8f544d9c66541b5d1b372bf9b63714dfc1b58486554e1fdff51d196c7b9e277455c54af4b1ee1106704072417cd269b407a9308807afe8fc45c10499271fba5a"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "00000003/file.xml" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v2/content/00000003/file.xml" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000003/file.xml" ;
+    continuum:partNumber "00000003" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2121x64kz7x/supplemental/v2/file.xml/00000004>
+    dcterms:created "2026-08-21T08:25:52.146115-06:00"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b2121x64kz7x> ;
+    ebucore:hasMimeType "application/xml" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "520acf7828058b0ece02b525249ee4f2f0184beb9c429eb4535c84858a9ebeb66e33626713d45bcaffc49d7d82e624b72bb71d47d5af3b18f11e2b523ebe6902"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "00000004/file.xml" ;
+    continuum:hasLogicalPath "b2/12/1x/64/kz/7x/v2/content/00000004/file.xml" ;
+    continuum:hasPath "b2/12/1x/64/kz/7x/v1/content/00000004/file.xml" ;
+    continuum:partNumber "00000004" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b26t29x3mm1d/preservation/v1/file.tif>
+    dcterms:created "2022-02-14T16:56:50.473205Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b26t29x3mm1d> ;
+    ebucore:hasMimeType "image/tiff" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "ad01ec50caac1100cb250f2c566c5ff449fa7eda2d5ff991f898d3679658b9dac31b49193265aea980626cdeb7a100b87aaccffef49d758674fab6f782810a46"
+    ] ;
+    continuum:fileType continuum:Preservation ;
+    continuum:filename "file.tif" ;
+    continuum:hasLogicalPath "b2/6t/29/x3/mm/1d/v1/content/file.tif" ;
+    continuum:hasPath "b2/6t/29/x3/mm/1d/v1/content/file.tif" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b26t29x3mm1d/preservation/v2/file.tif>
+    dcterms:created "2026-08-21T08:25:55.535831-06:00"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b26t29x3mm1d> ;
+    ebucore:hasMimeType "image/tiff" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "ad01ec50caac1100cb250f2c566c5ff449fa7eda2d5ff991f898d3679658b9dac31b49193265aea980626cdeb7a100b87aaccffef49d758674fab6f782810a46"
+    ] ;
+    continuum:fileType continuum:Preservation ;
+    continuum:filename "file.tif" ;
+    continuum:hasLogicalPath "b2/6t/29/x3/mm/1d/v2/content/file.tif" ;
+    continuum:hasPath "b2/6t/29/x3/mm/1d/v1/content/file.tif" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b26t29x3mm1d/supplemental/v1/file.dc.xml>
+    dcterms:created "2022-02-14T16:56:50.473205Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b26t29x3mm1d> ;
+    ebucore:hasMimeType "application/xml" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "bbef096ad5c23e0dfd14d20df2ee7e45a4796cfc0f8a228cecb0cf71d94d90ff2b7f7aae661d313a7b0293c41108e1d9f92e2c713614ef1653ad128e85e2351c"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "file.dc.xml" ;
+    continuum:hasLogicalPath "b2/6t/29/x3/mm/1d/v1/content/file.dc.xml" ;
+    continuum:hasPath "b2/6t/29/x3/mm/1d/v1/content/file.dc.xml" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b26t29x3mm1d/supplemental/v2/constraints.txt>
+    dcterms:created "2026-08-21T08:25:55.535831-06:00"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b26t29x3mm1d> ;
+    ebucore:hasMimeType "text" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "046e7030f6314e7c8eb38bdce0caa6f83e67e169ea74873289bf131d88ac9f2e2fec819034a43866bbf4d810c8c9b53d1aecdcde995993eb989789098a0f035a"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "constraints.txt" ;
+    continuum:hasLogicalPath "b2/6t/29/x3/mm/1d/v2/content/constraints.txt" ;
+    continuum:hasPath "b2/6t/29/x3/mm/1d/v2/content/constraints.txt" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b26t29x3mm1d/supplemental/v2/file.dc.xml>
+    dcterms:created "2026-08-21T08:25:55.535831-06:00"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:61001/b26t29x3mm1d> ;
+    ebucore:hasMimeType "application/xml" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "bbef096ad5c23e0dfd14d20df2ee7e45a4796cfc0f8a228cecb0cf71d94d90ff2b7f7aae661d313a7b0293c41108e1d9f92e2c713614ef1653ad128e85e2351c"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "file.dc.xml" ;
+    continuum:hasLogicalPath "b2/6t/29/x3/mm/1d/v2/content/file.dc.xml" ;
+    continuum:hasPath "b2/6t/29/x3/mm/1d/v1/content/file.dc.xml" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2k86bv2x025/manifest/v2/file.manifest.json>
+    dcterms:created "2026-03-27T15:56:36.153491Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:/61001/b2k86bv2x025> ;
+    ebucore:hasMimeType "application/json" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "9ed48dcdac19848969db9d6bdbbb69bc9126da4ce91a058573aa4b279f89e9698525ea754354784ec8c6f9684015dae23f426d59cdfb0ba7b42f34ca1829ce5f"
+    ] ;
+    continuum:fileType continuum:Manifest ;
+    continuum:filename "file.manifest.json" ;
+    continuum:hasLogicalPath "b2/k8/6b/v2/x0/25/v2/content/file.manifest.json" ;
+    continuum:hasPath "b2/k8/6b/v2/x0/25/v2/content/file.manifest.json" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2k86bv2x025/preservation/v1/file.tif>
+    dcterms:created "2020-07-22T17:55:43.977981Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:/61001/b2k86bv2x025> ;
+    ebucore:hasMimeType "image/tiff" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "5acc5433559f590cc9cacd9341ee843966e8643da861dab46961a276208b8ad916898a9d54624d690fdd3b12a8dabc48bb1550a1114880f9ceb993105cfabb5d"
+    ] ;
+    continuum:fileType continuum:Preservation ;
+    continuum:filename "file.tif" ;
+    continuum:hasLogicalPath "b2/k8/6b/v2/x0/25/v1/content/file.tif" ;
+    continuum:hasPath "b2/k8/6b/v2/x0/25/v1/content/file.tif" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b2k86bv2x025/supplemental/v1/file.dc.xml>
+    dcterms:created "2020-07-22T17:55:43.977981Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:/61001/b2k86bv2x025> ;
+    ebucore:hasMimeType "application/xml" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "5cc37c0fd93f214fd839caf714eca649ed971df92fba851780cdd4e337d02a4c577662a9016f83bbb58ac33792d00af4c9b93bcb807a2e68fa33b9a8381124cd"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "file.dc.xml" ;
+    continuum:hasLogicalPath "b2/k8/6b/v2/x0/25/v1/content/file.dc.xml" ;
+    continuum:hasPath "b2/k8/6b/v2/x0/25/v1/content/file.dc.xml" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b2k86bv2x025/supplemental/v1/file.ttl>
+    dcterms:created "2020-07-22T17:55:43.977981Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:/61001/b2k86bv2x025> ;
+    ebucore:hasMimeType "text/turtle" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "47093d74a450f10f5325497dca2cf89e545a242097d309ab0d84ac9c82f51e2274133b92d8809ce5771b36ca23e2dd72a90ed3394382237f4b2b4f5c47e86829"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "file.ttl" ;
+    continuum:hasLogicalPath "b2/k8/6b/v2/x0/25/v1/content/file.ttl" ;
+    continuum:hasPath "b2/k8/6b/v2/x0/25/v1/content/file.ttl" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b2k86bv2x025/supplemental/v1/file.xml>
+    dcterms:created "2020-07-22T17:55:43.977981Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:/61001/b2k86bv2x025> ;
+    ebucore:hasMimeType "application/xml" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "4428121cd8dc82df15e589f589e9590f523b5252baee474cab1c2fd29793c4a34be4d7e4b815d0e5271a755b9f8dddbc4007e2f9fa7c65b5dde387ca879ee149"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "file.xml" ;
+    continuum:hasLogicalPath "b2/k8/6b/v2/x0/25/v1/content/file.xml" ;
+    continuum:hasPath "b2/k8/6b/v2/x0/25/v1/content/file.xml" ;
+    continuum:partOfVersion "v1" .
+
+<https://continuum.lib.uchicago.edu/item/b2k86bv2x025/supplemental/v2/file.info.txt>
+    dcterms:created "2026-03-27T15:56:36.153491Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:/61001/b2k86bv2x025> ;
+    ebucore:hasMimeType "text" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "9c39bf5ad2d9e86a6d64a0e5f5b3af078c3e67a0bf1a56c65e6f0c18f3d2c32c0b91232c76c97eba1fef7d2e2a5b313736ebae029cf6ef817f1d2cc0ea71829e"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "file.info.txt" ;
+    continuum:hasLogicalPath "b2/k8/6b/v2/x0/25/v2/content/file.info.txt" ;
+    continuum:hasPath "b2/k8/6b/v2/x0/25/v2/content/file.info.txt" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2k86bv2x025/supplemental/v2/file.mets.xml>
+    dcterms:created "2026-03-27T15:56:36.153491Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:/61001/b2k86bv2x025> ;
+    ebucore:hasMimeType "application/xml" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "a3f5c4714dd4db936ab66f619ed3d9776002727e9b0db522698ef173d2ca7a6499687b540b3915dc1ab322b287de1d6745629a770e9709689b1ff0472c228232"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "file.mets.xml" ;
+    continuum:hasLogicalPath "b2/k8/6b/v2/x0/25/v2/content/file.mets.xml" ;
+    continuum:hasPath "b2/k8/6b/v2/x0/25/v2/content/file.mets.xml" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2k86bv2x025/supplemental/v2/file.mrc>
+    dcterms:created "2026-03-27T15:56:36.153491Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:/61001/b2k86bv2x025> ;
+    ebucore:hasMimeType "application/octet-stream" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "3027c53ea8384bc51f3ef66f9c75bbc6c0a6da127c5fa67c7d52b4776eff52f4351c83da1822507a5e0d15c641373744e509c34365598d045e934f7faec40317"
+    ] ;
+    continuum:fileType continuum:Supplemental ;
+    continuum:filename "file.mrc" ;
+    continuum:hasLogicalPath "b2/k8/6b/v2/x0/25/v2/content/file.mrc" ;
+    continuum:hasPath "b2/k8/6b/v2/x0/25/v2/content/file.mrc" ;
+    continuum:partOfVersion "v2" .
+
+<https://continuum.lib.uchicago.edu/item/b2k86bv2x025/viewer/v2/file.vaf.tif>
+    dcterms:created "2026-03-27T15:56:36.153491Z"^^xsd:datetime ;
+    dcterms:isPartOf <https://ark.lib.uchicago.edu/ark:/61001/b2k86bv2x025> ;
+    ebucore:hasMimeType "image/tiff" ;
+    premis:basis [
+        premis:allows uchicago:DownloadAllowed
+    ] ;
+    premis:fixity [
+        a <https://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/sha512> ;
+        rdf:value "655d5f1f7658e9967347b65b40e25b71db52a85ba58f635b122d1d79d7d6fcb2fca4614edbc21afa6963de46052b3d76c721276420835148764c66fa95e31087"
+    ] ;
+    continuum:fileType continuum:Viewer ;
+    continuum:filename "file.vaf.tif" ;
+    continuum:hasLogicalPath "b2/k8/6b/v2/x0/25/v2/content/file.vaf.tif" ;
+    continuum:hasPath "b2/k8/6b/v2/x0/25/v2/content/file.vaf.tif" ;
+    continuum:partOfVersion "v2" .
+

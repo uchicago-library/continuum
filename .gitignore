@@ -2,7 +2,10 @@ __pycache__/
 **/__pycache__/
 .venv/
 .continuum/
+tests/test.db/
+build/
 app_data/
 .env
 continuum.ttl
+**/*.egg-info/
 
