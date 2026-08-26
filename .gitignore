@@ -2,6 +2,7 @@ __pycache__/
 **/__pycache__/
 .venv/
 .continuum/
+build/
 app_data/
 .env
 continuum.ttl
