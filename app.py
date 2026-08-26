@@ -1,3 +1,3 @@
-from continuum.app import create_app
+from src.continuum.app import create_app
 
 app = create_app()
