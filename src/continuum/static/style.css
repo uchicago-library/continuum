@@ -1,0 +1,164 @@
+@import url("https://uchicago-brand-fonts.s3.us-east-2.amazonaws.com/UChicagoSansSerif.css");
+@import url("https://uchicago-brand-fonts.s3.us-east-2.amazonaws.com/UChicagoSerif.css");
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  padding: 5px;
+}
+h1 {
+  color: #800000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-family: "UChicagoSansSerif-Bold";
+}
+.autocomplete-container {
+  position: relative;
+  display: inline-block
+
+}
+
+.btn-search {
+    background-color: #800000;
+    color: #fff;
+    border: 1px solid #800000;
+    width: 30%;
+    height: 40px;
+    font-size: 1.1em;
+    /*padding: 0.6em;*/
+    line-height: 0.45em;
+    margin-top: 0;
+}
+
+.btn-default {
+    color: #fff;
+    background-color: #767676;
+    /*padding: 6px 12px;*/
+    /*margin-bottom: 10px;*/
+}
+
+.btn-groups {
+    /*background-color: #767676;*/
+    border: 1px solid #767676 ; /*#800000;*/
+    /*background: grey !important;*/
+    background: #767676 !important;
+    line-height: 0.45em;
+}
+.btn-groups:hover {
+
+  background-color: #800000 !important;
+}
+.btn {
+    padding: 10px 14px;
+    background-color: #800000;
+}
+.btn:hover {
+  background-color: #490000;
+}
+
+.form-control {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    height: 85%;
+    margin-bottom: 0;
+}
+
+.input-form {
+  background-color: lightgrey;
+}
+
+.autocomplete-list {
+  position: absolute;
+}
+
+a {
+  color: black;
+}
+
+a:visited {
+  color: dimgrey;
+}
+
+select,
+    ::picker(select) {
+  appearance: base-select;
+}
+
+select {
+  border: 2px solid #dddddd;
+  /*background: #eeeeee;*/
+  background: #767676;
+  padding: 10px;
+  transition: 0.4s;
+  color: #f1f1f1;
+
+  font-size: .8em;
+  font-family: "UChicagoSansSerif";
+  width: 170px;
+}
+
+select:hover,
+select:focus {
+  /*background: #dddddd;*/
+  background: #800000;
+}
+
+select::picker-icon {
+  color: #999999;
+  transition: 0.4s rotate;
+}
+
+option {
+  display:flex;
+  justify-content: flex-start;
+  background: #f1f1f1;
+  font-family: "UChicagoSansSerif";
+}
+option:hover,
+option:focus {
+  background: #800000 !important;
+  color: #f1f1f1;
+  background-color: #800000 !important;
+}
+input {
+  font-family: "UChicagoSansSerif";
+  font-size: 1.0em;
+}
+fieldset {
+  border: none;
+}
+form {
+  margin: 0 auto;
+  border:none;
+}
+
+.autocomplete-selection {
+  padding: .2em;
+  font-family:"UChicagoSansSerif";
+}
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: 1.0em;
+  border-top: 1.0em;
+  width: 100%;
+  background-color: #f1f1f1;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-active {
+  background-color: #800000 !important;
+  color: #ffffff;
+}

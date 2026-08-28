@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Continuum Repository</title>
+
+    <link href="{{ url_for('static', filename='/style.css') }}" rel="stylesheet">
+
+    <link rel='icon' href="https://www.lib.uchicago.edu/favicon.ico" />
+  </head>
+  <body>
+
+    <div class="center" aria-label="Search and explore section" role="region">
+      <div sytle="width:300px">
+      <h1><a href='/' style='color:inherit;text-decoration:none'>The Continuum Repository</a></h1>
+      <div class="input-form" >
+        <form  action="" method="GET" label="search for items in the repository">
+          <fieldset>
+	    <legend hidden>Search selected field for item</legend>
+            <div class="container" style="display:flex;justify-content:center">
+              <select name="field" id="field-selector" aria-label="select field to search"><!--</select>class="btn dropdown-toggle btn-default">-->
+		<label for="field-selector" hidden>Select one of the options to search</label>
+                <option value="ark">Ark Identifiers</option>
+                <option value="collection">Collection</option>
+                <option value="local-id">Local Identifiers</option>
+                <!-- <option disabled value="full-search">Full Search</option> -->
+                <!-- commenting out this option until a full text search is added -->
+              </select>
+              <div class="autocomplete-container">
+                     <input aria-label="Enter term for searching"  class="form-control" type="text" name="term" id="search-field" size=30 />
+              </div>
+              <input class="btn btn-search btn-default" id="field-search-button" type='submit' value='Search' label="preform search" />
+	      <label hidden for="field-search-button">press button to run search</label>
+            </div>
+          </fieldset>
+          <!--<button type="sybmit" value="Submit" id="submit-button" onclick="send()">Submit</button>-->
+          <!--  <button type="submit" value="Submit" id="submit-button">Submit</button> -->
+        </form>
+        <form action="" method="GET" class="center" aria-label="select a group of items to display">
+            <input class="btn  btn-default btn-groups" type="submit" value="Collections" name="group" />
+            <input class="btn btn-groups btn-default" type="submit" value="Arks" name="group" />
+            <input class="btn btn-groups btn-default" type="submit" value="Local Identifiers" name="group" />
+          </form>
+        </div>
+        </div>
+    </div>
+   <!-- <div>{{ item_list }}</div> -->
+    <div class="center" aria-label="Display data" role="region">
+      {% if data %}
+      <table>
+      {% set headings = data[0].keys() %}
+        <tr>
+          {% for heading in headings %}
+          {% if heading == "ark" %}
+          <!--<script>console.log("heading == ark")</script>-->
+          {% set has_ark_column = "1" %}
+          {% endif %}
+          <th>{{ heading }}</th>
+          {% endfor %}
+        </tr>
+      {% for row in data %}
+        <tr>
+          {% for heading in headings %}
+          <td>
+          </a>
+          <a href={{ '/?field=' ~ heading ~ '&term=' ~ row[heading] }} >
+          {{ row[heading] }}
+          </td>
+          {% endfor %}
+          {% if "ark" in row.keys() %}
+          <td><a href={{ '/items/' ~ row["ark"]}} style="text-decoration:none;color:#800000" > ⇗ </a></td>
+          <!--<td>    ↗️ </td>-->
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+
+    </div>
+
+    <div id="result-field" class="center">
+    </div>
+
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0"></script>
+  <script>
+
+    function closeAllLists() {
+      const autocompleteElements = document.getElementsByClassName("autocomplete-items");
+      for (const ele of autocompleteElements) {
+        ele.parentNode.removeChild(ele)
+      }
+    }
+    function createAutoCompleteSelections(field, options, parentElement) {
+      closeAllLists();
+      const optionDiv = document.createElement("div");
+      optionDiv.setAttribute("id", "autocomplete-list");
+      optionDiv.setAttribute("class", "autocomplete-items");
+      parentElement.appendChild(optionDiv);
+      for (const match of options) {
+        const selection = document.createElement("div");
+        selection.setAttribute("class", "autocomplete-selection");
+        selection.addEventListener("click", (e) => {
+          const selValue = match[field];
+          parentElement.value = selValue;
+          closeAllLists();
+        })
+        const value = match[field];
+        //selection.innerHTML = match[field];
+        selection.innerHTML = value;
+        //selection.appendChild(link);
+        optionDiv.appendChild(selection)
+      }
+      parentElement.parentNode.appendChild(optionDiv);
+
+    }
+
+    function createKeySelection(currentFocus, parentElement) {
+      parentElement.addEventListener("keydown", (e) => {
+        let auto_list = document.getElementById("autocomplete-list");
+        //console.log("auto_list", auto_list);
+        //console.log(currentFocus)
+        if (!auto_list) return false;
+        const options = auto_list.getElementsByTagName("div");
+        if (e.keyCode === 40) {
+          currentFocus++;
+          addActive(currentFocus, options);
+        } else if (e.keyCode === 38) {
+          currentFocus--;
+          addActive(currentFocus, options);
+        } else if (e.keyCode === 13) {
+          if (currentFocus > -1) {
+            if (options) options[currentFocus].click();
+          }
+        }
+
+      })
+    }
+
+    function addActive(currentFocus, options) {
+      if (!options) return false;
+      removeActive(options);
+      if (currentFocus >= options.length) currentFocus = 0;
+      if (currentFocus < 0) currentFocus = options.length - 1;
+      options[currentFocus].classList.add("autocomplete-active");
+    }
+    function removeActive(options) {
+      for (const option of options) {
+        option.classList.remove("autocomplete-active");
+      }
+    }
+
+    document.getElementById("search-field").addEventListener("input", (e) => {
+      autocomplete();
+    });
+    function autocomplete() {
+      const field = document.getElementById("field-selector").value;
+      const searchTerm = document.getElementById("search-field").value;
+      if (!searchTerm) {
+        closeAllLists();
+        return false
+      };
+      const searchField = document.getElementById("search-field");
+      const body = JSON.stringify({field, term: searchTerm})
+      fetch("/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: body
+
+      }).then(response => response.json())
+        .then(data => {
+          createAutoCompleteSelections(field, data, searchField);
+          createKeySelection(-1, searchField);
+          //console.log(data)
+        })
+
+    }
+  </script>
+</html>
