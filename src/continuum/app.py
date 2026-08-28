@@ -1,12 +1,15 @@
-from flask import Flask, send_file
+from flask import Flask, send_file, render_template, request
 from .triplestore import (
     filter_file_types,
     FileArguments,
     # create_database,
     TripleStore,
 )
+from .search import search_index, create_index
 from pathlib import Path
 
+# import json
+from dotenv import load_dotenv
 import os
 
 from typing import Optional, Callable
@@ -72,7 +75,7 @@ def construct_file_arguments(
         page=page,
         mime_type=mime_type,
     )
-    logger.debug("file arguments", str(obj))
+    logger.debug(f"file arguments {str(obj)}")
     return obj
 
 
@@ -89,10 +92,13 @@ def create_app(
     app = Flask(__name__)
 
     store = TripleStore(Path(db_path), app.logger, turtle_file)
+    create_index(store, app.logger)
 
+    """
     @app.route("/")
     def say_hello():
         return "Hello World"
+    """
 
     """
     @app.before_request
@@ -142,7 +148,7 @@ def create_app(
         argv3 : version
         <ark_id>/<page>/<file_name>/<version>
         """
-        # print(f"ark_id: {ark_id}, file_name: {file_name}, version: {version}")
+        # app.logger.debug(f"ark_id: {ark_id}, file_name: {file_name}, version: {version}")
         obj = construct_file_arguments(
             app.logger, ark_id, file_name=file_name, page=page, version=version
         )
@@ -173,5 +179,91 @@ def create_app(
                     "Error with the requested file",
                     code,
                 )
+        # app.logger.debug("file arguments", obj)
+        image_obj = store.find_file_path(obj)
+        # app.logger.debug("image obj", image_obj)
+        if len(image_obj) == 1:
+            image_path = Path(image_obj[0]["path"])
+
+        else:
+            return (
+                "The requested resource is unavailable. Please consult node@lib.uchicago.edu for further information",
+                403,
+            )
+
+        if basedir:
+            # relative_path = Path(image_path).relative_to(
+            #    "/data/digital_collections_ocfl/ark_data/"
+            # )
+
+            # image_path = Path(BASEDIR) / relative_path
+            image_path = Path(basedir) / image_path
+            # image_path = Path(
+            #    ipath.replace("/data/digital_collections_ocfl/ark_data/", BASEDIR)
+            # )
+            #
+        if not image_path.is_file():
+            return f"error: Image not found on the server {image_path}", 400
+
+        return send_file(image_path, as_attachment=False)
+        # return (
+        #    "The requested resource is currently restricted. Please consult node@lib.uchicago.edu for further information",
+        #    403,
+        # )
+
+    @app.route("/")
+    def read_route(
+        term: Optional[str] = None,
+        field: Optional[str] = None,
+    ):
+        if group := request.args.get("group"):
+            match group:
+                case "Collections":
+                    data = store.get_collections()
+                case "Arks":
+                    data = store.get_arks()
+                case "Local Identifiers":
+                    data = store.get_local_ids()
+                case _:
+                    return "error"
+            app.logger.debug("data", data)
+            return render_template("index.html", data=data)
+
+        if not (field := request.args.get("field")):
+            return render_template("index.html")
+
+        if term := request.args.get("term"):
+            app.logger.debug(f"Term: {term}")
+            data = store.search_for_term(field, term)
+            app.logger.debug(f"Data: {data}")
+            return render_template("index.html", data=data)  # , context={"data": data})
+
+        return render_template("index.html")  # , context={"data": data})
+
+    @app.route("/items/<id>")
+    def read_item(id: str):
+        # ark_node = ns.ark.term(id if id.startswith("ark:61001/") else f"ark:61001/{id}")
+
+        app.logger.debug("items id", id)
+        object_data = store.retrieve_object_data(id)
+        data = {"id": id, "data": object_data}
+        return render_template("item.html", data=data)
+
+    @app.route("/search", methods=["POST"])
+    def process_search_term():
+        body = request.json
+        # app.logger.debug("search body:", json.dumps(body))
+        if (term := body.get("term")) and (field := body.get("field")):
+            document = search_index(field, term)
+            res = [
+                {
+                    "ark": r.text,
+                    "id": r.ark,
+                    "local-id": r.local_id,
+                    "collection": r.collection,
+                }
+                for r in document
+            ]
+            return res
 
     return app
