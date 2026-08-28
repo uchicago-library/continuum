@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Continuum Item</title>
+
+    <link rel='icon' href="https://www.lib.uchicago.edu/favicon.ico" />
+    <link href="{{ url_for('static', filename='/style.css') }}" rel="stylesheet">
+
+    <title>Item Details</title>
+</head>
+<body >
+
+  <div role="region" aria-label="Headings">
+    <h1><a href='/' style='color:inherit;text-decoration:none'>The Continuum Repository</a></h1>
+    <h2 class="center">{{ id }}</h1>
+  </div>
+
+  <div class="center" role="region" aira-label="details of the item">
+    {% if quads %}
+    <table>
+      {% for quad in quads %}
+        <tr>
+        {% set subject = quad.subject %}
+        {% set predicate = quad.predicate %}
+        {% set obj = quad.object %}
+          <td>{{ subject }}</td>
+          <td>{{ predicate }}</td>
+          <td>{{ obj }}</td>
+
+        </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+    {% if data["data"] %}
+    <table>
+      {% set arks = data["data"]["ark"] %}
+      <th>OCFL Object</th>
+      {% for ark in arks %}
+        {% for field, value in ark.items() %}
+        <tr>
+          <td>{{ field }}</td>
+          <td>
+            {% if value is string %}
+              {{ value }}
+            {% else %}
+              {% for v in value %}
+                <div>
+                  {% if field == "collection" %}
+                    <a href={{ "/project/" + v }}>
+                      {{ v }}
+                    </a>
+                  {% else %}
+                    {{ v }}
+                  {% endif %}
+              </div>
+              {% endfor %}
+           {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      {% endfor %}
+      {% set file = data["data"]["file"] %}
+      {% for version, objects in file.items() %}
+        <th>{{ version }}</th>
+        {% for row in objects %}
+        <tr>
+          <td>{{ row["file_type"].replace("http://continuum.lib.uchicago.edu/ontology/", "") }}</td>
+          <td><a href={{ row["url"]}}>{{ row["path"] }}</a></td>
+          <td>{{ row["created"] }}</td>
+        </tr>
+        {% endfor %}
+      {% endfor %}
+    </table>
+    {% endif %}
+
+  </div>
+
+</body>
+</html>
