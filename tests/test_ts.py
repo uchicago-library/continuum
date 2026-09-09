@@ -22,7 +22,7 @@ def create_store():
 @pytest.fixture
 def triplestore(app):
     db_path = create_store()
-    ts = TripleStore(Path(db_path), app.logger)
+    ts = TripleStore(Path(db_path), app.logger, "tests/test_data.ttl")
     return ts
 
 
