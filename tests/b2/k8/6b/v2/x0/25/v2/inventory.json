@@ -1,0 +1,78 @@
+{
+  "digestAlgorithm": "sha512",
+  "id": "ark:/61001/b2k86bv2x025",
+  "versions": {
+    "v1": {
+      "created": "2026-09-04T09:30:33.0234Z",
+      "message": "updating for testing",
+      "user": {
+        "name": "Shawn Goodwin",
+        "address": "mailto:svgoodwin@uchicago.edu"
+      },
+      "state": {
+        "5cc37c0fd93f214fd839caf714eca649ed971df92fba851780cdd4e337d02a4c577662a9016f83bbb58ac33792d00af4c9b93bcb807a2e68fa33b9a8381124cd": [
+          "file.dc.xml"
+        ],
+        "47093d74a450f10f5325497dca2cf89e545a242097d309ab0d84ac9c82f51e2274133b92d8809ce5771b36ca23e2dd72a90ed3394382237f4b2b4f5c47e86829": [
+          "file.ttl"
+        ],
+        "4428121cd8dc82df15e589f589e9590f523b5252baee474cab1c2fd29793c4a34be4d7e4b815d0e5271a755b9f8dddbc4007e2f9fa7c65b5dde387ca879ee149": [
+          "file.xml"
+        ]
+      }
+    },
+    "v2": {
+      "created": "2026-09-04T09:30:33.0234Z",
+      "message": "updating for testing",
+      "user": {
+        "name": "Shawn Goodwin",
+        "address": "mailto:svgoodwin@uchicago.edu"
+      },
+      "state": {
+        "9c39bf5ad2d9e86a6d64a0e5f5b3af078c3e67a0bf1a56c65e6f0c18f3d2c32c0b91232c76c97eba1fef7d2e2a5b313736ebae029cf6ef817f1d2cc0ea71829e": [
+          "file.info.txt"
+        ],
+        "9ed48dcdac19848969db9d6bdbbb69bc9126da4ce91a058573aa4b279f89e9698525ea754354784ec8c6f9684015dae23f426d59cdfb0ba7b42f34ca1829ce5f": [
+          "file.manifest.json"
+        ],
+        "a3f5c4714dd4db936ab66f619ed3d9776002727e9b0db522698ef173d2ca7a6499687b540b3915dc1ab322b287de1d6745629a770e9709689b1ff0472c228232": [
+          "file.mets.xml"
+        ],
+        "3027c53ea8384bc51f3ef66f9c75bbc6c0a6da127c5fa67c7d52b4776eff52f4351c83da1822507a5e0d15c641373744e509c34365598d045e934f7faec40317": [
+          "file.mrc"
+        ],
+        "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e": [
+          "file.vaf.tif"
+        ]
+      }
+    }
+  },
+  "head": "v2",
+  "manifest": {
+    "5cc37c0fd93f214fd839caf714eca649ed971df92fba851780cdd4e337d02a4c577662a9016f83bbb58ac33792d00af4c9b93bcb807a2e68fa33b9a8381124cd": [
+      "v1/content/file.dc.xml"
+    ],
+    "47093d74a450f10f5325497dca2cf89e545a242097d309ab0d84ac9c82f51e2274133b92d8809ce5771b36ca23e2dd72a90ed3394382237f4b2b4f5c47e86829": [
+      "v1/content/file.ttl"
+    ],
+    "4428121cd8dc82df15e589f589e9590f523b5252baee474cab1c2fd29793c4a34be4d7e4b815d0e5271a755b9f8dddbc4007e2f9fa7c65b5dde387ca879ee149": [
+      "v1/content/file.xml"
+    ],
+    "9c39bf5ad2d9e86a6d64a0e5f5b3af078c3e67a0bf1a56c65e6f0c18f3d2c32c0b91232c76c97eba1fef7d2e2a5b313736ebae029cf6ef817f1d2cc0ea71829e": [
+      "v2/content/file.info.txt"
+    ],
+    "9ed48dcdac19848969db9d6bdbbb69bc9126da4ce91a058573aa4b279f89e9698525ea754354784ec8c6f9684015dae23f426d59cdfb0ba7b42f34ca1829ce5f": [
+      "v2/content/file.manifest.json"
+    ],
+    "a3f5c4714dd4db936ab66f619ed3d9776002727e9b0db522698ef173d2ca7a6499687b540b3915dc1ab322b287de1d6745629a770e9709689b1ff0472c228232": [
+      "v2/content/file.mets.xml"
+    ],
+    "3027c53ea8384bc51f3ef66f9c75bbc6c0a6da127c5fa67c7d52b4776eff52f4351c83da1822507a5e0d15c641373744e509c34365598d045e934f7faec40317": [
+      "v2/content/file.mrc"
+    ],
+    "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e": [
+      "v2/content/file.vaf.tif"
+    ]
+  },
+  "type": "https://ocfl.io/1.1/spec/#inventory"
+}

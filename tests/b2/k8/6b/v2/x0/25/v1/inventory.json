@@ -1,0 +1,38 @@
+{
+  "digestAlgorithm": "sha512",
+  "id": "ark:/61001/b2k86bv2x025",
+  "versions": {
+    "v1": {
+      "created": "2026-09-04T09:30:33.0234Z",
+      "message": "updating for testing",
+      "user": {
+        "name": "Shawn Goodwin",
+        "address": "mailto:svgoodwin@uchicago.edu"
+      },
+      "state": {
+        "5cc37c0fd93f214fd839caf714eca649ed971df92fba851780cdd4e337d02a4c577662a9016f83bbb58ac33792d00af4c9b93bcb807a2e68fa33b9a8381124cd": [
+          "file.dc.xml"
+        ],
+        "47093d74a450f10f5325497dca2cf89e545a242097d309ab0d84ac9c82f51e2274133b92d8809ce5771b36ca23e2dd72a90ed3394382237f4b2b4f5c47e86829": [
+          "file.ttl"
+        ],
+        "4428121cd8dc82df15e589f589e9590f523b5252baee474cab1c2fd29793c4a34be4d7e4b815d0e5271a755b9f8dddbc4007e2f9fa7c65b5dde387ca879ee149": [
+          "file.xml"
+        ]
+      }
+    }
+  },
+  "head": "v1",
+  "manifest": {
+    "5cc37c0fd93f214fd839caf714eca649ed971df92fba851780cdd4e337d02a4c577662a9016f83bbb58ac33792d00af4c9b93bcb807a2e68fa33b9a8381124cd": [
+      "v1/content/file.dc.xml"
+    ],
+    "47093d74a450f10f5325497dca2cf89e545a242097d309ab0d84ac9c82f51e2274133b92d8809ce5771b36ca23e2dd72a90ed3394382237f4b2b4f5c47e86829": [
+      "v1/content/file.ttl"
+    ],
+    "4428121cd8dc82df15e589f589e9590f523b5252baee474cab1c2fd29793c4a34be4d7e4b815d0e5271a755b9f8dddbc4007e2f9fa7c65b5dde387ca879ee149": [
+      "v1/content/file.xml"
+    ]
+  },
+  "type": "https://ocfl.io/1.1/spec/#inventory"
+}
