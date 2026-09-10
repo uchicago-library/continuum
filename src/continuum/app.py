@@ -8,21 +8,9 @@ from .triplestore import (
 from .search import search_index, create_index
 from pathlib import Path
 
-# import json
-from dotenv import load_dotenv
 import os
 
-
 from typing import Optional, Callable
-
-load_dotenv()
-
-BASEDIR = os.getenv("BASEDIR")
-
-# BASEDIR = "/data/digital_collections_ocfl/ark_data/"
-# DB = Path("/data/local/app_data/project.db")
-DB = os.getenv("CONTINUUMDB")
-# print(DB)
 
 store: TripleStore
 
@@ -88,14 +76,19 @@ def construct_file_arguments(
     return obj
 
 
-def create_app(test_config=None):
+def create_app(
+    test_config=None,
+    turtle_file: str = "",
+    db_path: str = "",
+    basedir: Optional[str] = None,
+):
     """ """
     # Initialize the triple store
     global store
 
     app = Flask(__name__)
 
-    store = TripleStore(Path(DB), app.logger)
+    store = TripleStore(Path(db_path), app.logger, turtle_file)
     create_index(store, app.logger)
 
     """
@@ -164,17 +157,17 @@ def create_app(test_config=None):
 
         else:
             return (
-                "The requested resource is unavailable. Please consult node@lib.uchicago.edu for further information",
+                "The requested resource is unavailable. Please consult node-admins@uchicago.edu for further information.",
                 403,
             )
 
-        if BASEDIR:
+        if basedir:
             # relative_path = Path(image_path).relative_to(
             #    "/data/digital_collections_ocfl/ark_data/"
             # )
 
             # image_path = Path(BASEDIR) / relative_path
-            image_path = Path(BASEDIR) / image_path
+            image_path = Path(basedir) / image_path
             # image_path = Path(
             #    ipath.replace("/data/digital_collections_ocfl/ark_data/", BASEDIR)
             # )

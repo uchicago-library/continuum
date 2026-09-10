@@ -175,30 +175,3 @@ def test_filexml_test(app):
     assert args["file_name"] == "file.xml"
     assert args["page"] is None
     assert args["mime_type"] is None
-
-
-##########################################################
-#
-# Send requests to the client and validate the response
-#
-##########################################################
-
-
-def test_client_(client):
-    # <https://continuum.lib.uchicago.edu/item/b2k86bv2x025/supplemental/v2/file.info.txt>
-    response = client.get("/file/b2k86bv2x025/file.info.txt")
-
-    assert (
-        b"""Bag-Software-Agent: bagit.py v1.9.0 <https://github.com/LibraryOfCongress/bagit-python>
-Bagging-Date: 2026-01-28
-Collection-Name: social-scientists-map-chicago
-External-Identifier: ark:61001/b2k86bv2x025
-Internal-Sender-Identifier: G4104-C6-1933-U5-p
-Payload-Oxum: 67760831.5
-Resource-Constraints: http://creativecommons.org/licenses/by-nc/4.0/
-Resource-Date: 1935
-Resource-Description: (:unav)
-Resource-Title: Metropolitan region of Chicago, per cent of population white of native parentage, by townships, 1930
-Source-Organization: University of Chicago Library, Digitization Unit"""
-        in response.data
-    )

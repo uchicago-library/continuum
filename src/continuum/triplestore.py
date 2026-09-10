@@ -2,15 +2,9 @@ from pyoxigraph import NamedNode, Literal, Store, QuerySolutions, RdfFormat, Qua
 from pathlib import Path
 from typing import Dict, Optional, TypedDict, List, Callable
 import shutil
-
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
-
-TURTLE_FILE = os.getenv("CONTINUUM_TURTLE")
-
-store: Store = Store()
+# store: Store = Store()
 
 
 class FileArguments(TypedDict):
@@ -63,13 +57,13 @@ PREFIXES = {
 ns = NS(PREFIXES)
 
 
-def load_store(database: Path, turtle_time: float, logger: Callable):
+def load_store(database: Path, turtle_time: float, logger: Callable, turtle_file: str):
     """
     Create a new store, and add the timestamp to it
     """
     store = Store(str(database))
     logger.info("loading store from ttl")
-    with open(TURTLE_FILE, "r") as ttlp:
+    with open(turtle_file, "r") as ttlp:
         store.bulk_load(ttlp, format=RdfFormat.TURTLE)
     logger.info("store loaded")
     store.add(
@@ -85,7 +79,7 @@ def load_store(database: Path, turtle_time: float, logger: Callable):
     return store
 
 
-def create_database(database: Path, logger: Callable):
+def create_database(database: Path, logger: Callable, turtle_file: str):
     """This creates the database connection.
     If No database exists, the database is created from a turtle file
     But if the dtabase does exist and is outdated, the database is deleted
@@ -95,7 +89,7 @@ def create_database(database: Path, logger: Callable):
     """
 
     # print(os.getcwd())
-    turtle_time = os.path.getmtime(TURTLE_FILE)
+    turtle_time = os.path.getmtime(turtle_file)
     global store
 
     if database.exists():
@@ -116,12 +110,12 @@ def create_database(database: Path, logger: Callable):
         if len(startdt) == 0 or startdt[0] < turtle_time:
             logger.info("Turtle Out of Date")
             shutil.rmtree(database)
-            store = load_store(database, turtle_time, logger)
+            store = load_store(database, turtle_time, logger, turtle_file)
 
     else:
         store = Store(database)
         logger.info("loading store from ttl")
-        store = load_store(database, turtle_time)
+        store = load_store(database, turtle_time, turtle_file)
 
     return store, turtle_time
 
@@ -142,8 +136,8 @@ def filter_file_types(file_type: str):
 
 
 class TripleStore:
-    def __init__(self, database: Path, logger: Callable):
-        self.store, self.turtle_time = create_database(database, logger)
+    def __init__(self, database: Path, logger: Callable, turtle_file: str):
+        self.store, self.turtle_time = create_database(database, logger, turtle_file)
         self.logger = logger
 
     def find_file_path(self, arguments: FileArguments) -> List[Dict[str, str]]:
