@@ -1,4 +1,4 @@
--e .
+# -e .
 flask
 Jinja2==3.1.6
 pyoxigraph==0.5.5
