@@ -4,12 +4,12 @@ from pyoxigraph import QuerySolutions, Store
 from typing import Callable
 from pathlib import Path
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 
-load_dotenv()
+# load_dotenv()
 
-INDEX_DB = Path(os.getenv("CONTINUUMDB")).parent / "index.db"
+# INDEX_DB = Path(os.getenv("CONTINUUMDB")).parent / "index.db"
 
 
 class SearchContents(Schema):
@@ -25,7 +25,7 @@ class SearchContents(Schema):
 # INDEX = PocketSearch()
 
 
-def create_index(store: Store, logger: Callable):
+def create_index(store: Store, logger: Callable, index_db: Path):
     logger.info("creating indexes")
     search_index_query = """
         PREFIX continuum: <https://continuum.lib.uchicago.edu/ontology/>
@@ -54,7 +54,7 @@ def create_index(store: Store, logger: Callable):
     results = store.store.query(search_index_query)
     if not isinstance(results, QuerySolutions):
         raise Exception(f"Error in Query: {search_index_query}")
-    with PocketWriter(db_name=str(INDEX_DB), schema=SearchContents) as writer:
+    with PocketWriter(db_name=str(index_db), schema=SearchContents) as writer:
         writer.delete_all()
         for result in results:
             try:
@@ -76,12 +76,12 @@ def create_index(store: Store, logger: Callable):
 #    create_index(store)
 
 
-def search_index(field: str, term: str):
+def search_index(field: str, term: str, index_db: Path):
     """
     provide the results of a search index term
     """
     with PocketReader(
-        db_name=str(INDEX_DB),
+        db_name=str(index_db),
         schema=SearchContents,
     ) as preader:
         match field:
