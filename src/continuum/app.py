@@ -81,6 +81,7 @@ def create_app(
     turtle_file: str = "",
     db_path: str = "",
     basedir: Optional[str] = None,
+    index_db: Optional[Path] = None,
 ):
     """ """
     # Initialize the triple store
@@ -89,7 +90,7 @@ def create_app(
     app = Flask(__name__)
 
     store = TripleStore(Path(db_path), app.logger, turtle_file)
-    create_index(store, app.logger)
+    create_index(store, app.logger, index_db)
 
     """
     @app.route("/")
@@ -224,7 +225,7 @@ def create_app(
         body = request.json
         # app.logger.debug("search body:", json.dumps(body))
         if (term := body.get("term")) and (field := body.get("field")):
-            document = search_index(field, term)
+            document = search_index(field, term, index_db)
             res = [
                 {
                     "ark": r.text,
