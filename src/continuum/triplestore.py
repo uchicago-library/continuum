@@ -115,7 +115,7 @@ def create_database(database: Path, logger: Callable, turtle_file: str):
     else:
         store = Store(database)
         logger.info("loading store from ttl")
-        store = load_store(database, turtle_time, turtle_file)
+        store = load_store(database, turtle_time, logger, turtle_file)
 
     return store, turtle_time
 
