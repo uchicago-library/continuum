@@ -155,7 +155,7 @@ def create_app(
             # print("ipath", ipath)
         else:
             return (
-                "The requested resource is unavailable. Please consult node-admins@uchicago.edu for further information.",
+                "The requested resource is unavailable. Please consult node-admins@lib.uchicago.edu for further information.",
                 403,
             )
 
