@@ -1,6 +1,6 @@
 from pyoxigraph import NamedNode, Literal, Store, QuerySolutions, RdfFormat, Quad
 from pathlib import Path
-from typing import Dict, Optional, TypedDict, List, Callable
+from typing import Dict, Optional, TypedDict, List, Callable, Tuple
 import shutil
 import os
 
@@ -140,7 +140,9 @@ class TripleStore:
         self.store, self.turtle_time = create_database(database, logger, turtle_file)
         self.logger = logger
 
-    def find_file_path(self, arguments: FileArguments) -> List[Dict[str, str]]:
+    def find_file_path(
+        self, arguments: FileArguments
+    ) -> Tuple[List[Dict[str, str]], int]:
         """
         Find the file paths based on the arguments of the files
         Arguments:
@@ -170,7 +172,7 @@ class TripleStore:
       ?file dcterms:isPartOf ?arkNode .
       ?file continuum:fileType %s .
       ?file  continuum:hasPath ?path .
-      ?file premis:basis/premis:allows uchicago:DownloadAllowed .
+      # ?file premis:basis/premis:allows uchicago:DownloadAllowed .
     """ % (
             Literal(arguments["ark_id"]),
             arguments["type_node"],
@@ -208,4 +210,28 @@ class TripleStore:
         results = self.store.query(query)
         if not isinstance(results, QuerySolutions):
             raise Exception("Error in query")
-        return [{"ark": res["ark"].value, "path": res["path"].value} for res in results]
+        res_list = [
+            {"ark": res["ark"].value, "path": res["path"].value} for res in results
+        ]
+        if len(res_list) != 1:
+            return ([], 404)
+        ask_query = """
+    PREFIX continuum: <https://continuum.lib.uchicago.edu/ontology/>
+    PREFIX premis: <http://www.loc.gov/premis/rdf/v3/>
+    PREFIX uchicago: <https://lib.uchicago.edu/>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+
+    ASK {
+        VALUES ?arkId { %s }
+        ?file
+            dcterms:isPartOf/continuum:hasArkID ?arkId ;
+            premis:basis/premis:allows uchicago:DownloadAllowed ;
+        .
+    }
+        """ % Literal(arguments["ark_id"])
+        self.logger.debug(f"Ask Query:\n{ask_query} ")
+        ask_result = self.store.query(ask_query)
+        if ask_result:
+            return (res_list, 1)
+        else:
+            return ([], 0)

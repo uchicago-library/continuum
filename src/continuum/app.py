@@ -147,37 +147,31 @@ def create_app(
             app.logger, ark_id, file_name=file_name, page=page, version=version
         )
         # print("file arguments", obj)
-        image_obj = store.find_file_path(obj)
+        image_obj, code = store.find_file_path(obj)
         # print("image obj", image_obj)
-        if len(image_obj) == 1:
-            image_path = Path(image_obj[0]["path"])
+        match code:
+            case 1:
+                image_path = Path(image_obj[0]["path"])
+                if basedir:
+                    image_path = Path(basedir) / image_path
 
-            # print("ipath", ipath)
-        else:
-            return (
-                "The requested resource is unavailable. Please consult node-admins@lib.uchicago.edu for further information.",
-                403,
-            )
-
-        if basedir:
-            # relative_path = Path(image_path).relative_to(
-            #    "/data/digital_collections_ocfl/ark_data/"
-            # )
-
-            # image_path = Path(BASEDIR) / relative_path
-            image_path = Path(basedir) / image_path
-            # image_path = Path(
-            #    ipath.replace("/data/digital_collections_ocfl/ark_data/", BASEDIR)
-            # )
-            # print("image path: ", image_path)
-            #
-        if not image_path.is_file():
-            return f"error: Image not found on the server {image_path}", 400
-
-        return send_file(image_path, as_attachment=False)
-        # return (
-        #    "The requested resource is currently restricted. Please consult node@lib.uchicago.edu for further information",
-        #    403,
-        # )
+                if not image_path.is_file():
+                    return f"error: Image not found on the server {image_path}", 400
+                return send_file(image_path, as_attachment=False)
+            case 0:
+                return (
+                    "The requested resource is unavailable. Please consult node-admins@lib.uchicago.edu for further information.",
+                    403,
+                )
+            case 404:
+                return (
+                    "The requested resouce was not found",
+                    404,
+                )
+            case _:
+                return (
+                    "Error with the requested file",
+                    code,
+                )
 
     return app
