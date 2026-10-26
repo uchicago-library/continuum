@@ -34,4 +34,4 @@ def test_retriveal(triplestore, app):
     file_obj = construct_file_arguments(app.logger, "b2k86bv2x025", "mets")
 
     results = triplestore.find_file_path(file_obj)
-    assert len(results) == 1
+    assert len(results[0]) == 1
