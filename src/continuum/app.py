@@ -165,7 +165,7 @@ def create_app(
                 )
             case 404:
                 return (
-                    "The requested resouce was not found",
+                    "The requested resource was not found",
                     404,
                 )
             case _:
