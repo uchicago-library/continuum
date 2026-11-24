@@ -41,6 +41,7 @@ def create_index(store: Store, logger: Callable, index_db: Path):
                 continuum:hasArkID ?ark ;
                 continuum:originalIdentifier ?localId ;
             .
+            FILTER(!REGEX(?localId, "ark:", "i"))
             OPTIONAL {
             ?arkNode
                 dcterms:isPartOf/rdfs:label ?coll ;
