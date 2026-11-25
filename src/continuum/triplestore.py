@@ -152,7 +152,7 @@ class TripleStore:
         file_name: Optional[str]
         page: Optional[str]
         """
-        # print(arguments)
+        print(arguments)
         query = """
     PREFIX continuum: <https://continuum.lib.uchicago.edu/ontology/>
     PREFIX uchicago: <https://lib.uchicago.edu/>
@@ -189,6 +189,11 @@ class TripleStore:
         page = arguments.get("page")
         if page:
             query = query + "\n      ?file continuum:partNumber %s ." % Literal(page)
+        else:
+            query = (
+                query
+                + "\n      FILTER NOT EXISTS { ?file continuum:partNumber ?part . }"
+            )
         if file_name := arguments.get("file_name"):
             if not page:
                 query = query + "\n      ?file continuum:filename %s ." % Literal(
